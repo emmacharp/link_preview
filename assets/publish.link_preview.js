@@ -10,6 +10,8 @@
  */
 (function ($, undefined) {
 
+	'use strict';
+
 	var FIELD = 'field-link_preview';
 	var FIELD_CLASS = '.' + FIELD;
 	var target = $();
@@ -21,25 +23,20 @@
 		var text = elem.attr('data-text');
 
 		if (!!url && url != '') {
-			var li = $('<li />'),
-				link = $('<a />')
-				.html('<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="33.7px" height="19.3px" viewBox="0 0 33.7 19.3"><path fill="currentColor" d="M16.8,19.3c-9.1,0-16.3-8.7-16.6-9c-0.3-0.4-0.3-0.9,0-1.3c0.3-0.4,7.5-9,16.6-9s16.3,8.7,16.6,9c0.3,0.4,0.3,0.9,0,1.3C33.2,10.7,26,19.3,16.8,19.3z M2.3,9.7c1.8,1.9,7.7,7.7,14.5,7.7c6.8,0,12.7-5.7,14.5-7.7C29.6,7.7,23.7,2,16.8,2C10,2,4.1,7.7,2.3,9.7z"/><path fill="currentColor" d="M16.8,15.3c-3.1,0-5.6-2.5-5.6-5.6c0-3.1,2.5-5.6,5.6-5.6s5.6,2.5,5.6,5.6C22.5,12.8,20,15.3,16.8,15.3zM16.8,6c-2,0-3.6,1.6-3.6,3.6s1.6,3.6,3.6,3.6s3.6-1.6,3.6-3.6S18.9,6,16.8,6z"/></svg><span><span>'+text+'</span></span>')
+			var link = $('<a />')
+				.html('<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M19 1H10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M19 10V1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M1 1V15C1 17.2091 2.79086 19 5 19H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.7071 1.70711C20.0976 1.31658 20.0976 0.683417 19.7071 0.292893C19.3166 -0.0976311 18.6834 -0.0976311 18.2929 0.292893L19.7071 1.70711ZM7.29289 11.2929C6.90237 11.6834 6.90237 12.3166 7.29289 12.7071C7.68342 13.0976 8.31658 13.0976 8.70711 12.7071L7.29289 11.2929ZM18.2929 0.292893L7.29289 11.2929L8.70711 12.7071L19.7071 1.70711L18.2929 0.292893Z" fill="currentColor"/></svg>')
 				.attr('class', 'button drawer vertical-right link-preview')
 				.attr('href', url)
-				.attr('target', '_blank');
+				.attr('target', '_blank')
+				.attr('title', text);
 
-			li.append(link);
-
-			target.prepend(li);
+			target.prepend(link);
 		}
 	};
 
 	var init = function () {
-		target = Symphony.Elements.context.find('.actions');
-		if (!target.length) {
-			target = $('<ul>').attr('class', 'actions');
-			Symphony.Elements.breadcrumbs.after(target);
-		}
+		target = window.Symphony.Elements.contents.find('#contents-actions .actions').last();
+
 		return $(FIELD_CLASS).each(hookOne);
 	};
 
