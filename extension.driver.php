@@ -53,7 +53,7 @@
 			// publish page, new or edit
 			if(isset($c['context']['section_handle']) && in_array($c['context']['page'], array('new', 'edit'))){
 
-				Administration::instance()->Page->addScriptToHead(
+				Administration::instance()->Page->addScriptToBody(
 					URL . '/extensions/link_preview/assets/publish.link_preview.js',
 					time() + 1,
 					false
